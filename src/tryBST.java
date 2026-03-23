@@ -1,14 +1,16 @@
-public class tryBST {
-    class tNode {
-        int key;
-        tNode left;
-        tNode right;
-        tNode(int item) {
-            key = item;
-            left = null;
-            right = null;
-        }
+class tNode {
+    int key;
+    tNode left;
+    tNode right;
+
+    tNode(int item) {
+        key = item;
+        left = null;
+        right = null;
     }
+}
+
+public class tryBST {
     boolean isBST() {
         return isBSTUtil(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
@@ -20,5 +22,18 @@ public class tryBST {
             return false;
         }
         return isBSTUtil(node.left, min, node.key) && isBSTUtil(node.right, node.key, max);
+    }
+    tNode insertRec(tNode root, int key) {
+        if (root == null) {
+            root = new tNode(key);
+            return root;
+        }
+        if (key < root.key) {
+            root.left = insertRec(root.left, key);
+
+        } else if (key > root.key) {
+            root.right = insertRec(root.right, key);
+        }
+        return root;
     }
 }
