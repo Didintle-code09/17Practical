@@ -75,4 +75,14 @@ public class tryBST {
     public void delete(int key) {
         root = deleteRec(root, key);
     }
+    public void removeEvens(tNode node) {
+        if (node == null) {
+            return;
+        }
+        removeEvens(node.left);
+        removeEvens(node.right);
+        if (node.key % 2 == 0) {
+            delete(node.key);
+        }
+    }
 }
