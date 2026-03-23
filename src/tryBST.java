@@ -66,11 +66,21 @@ public class tryBST {
         root = deleteRec(root, key);
     }
 
-    public void removeEvens(tNode node) {
-        if (node == null) return;
-        removeEvens(node.left);
-        removeEvens(node.right);
-        if (node.key % 2 == 0) delete(node.key);
+    public tNode removeEvensSafe(tNode node) {
+        if (node == null) return null;
+
+        node.left = removeEvensSafe(node.left);
+        node.right = removeEvensSafe(node.right);
+
+        if (node.key % 2 == 0) {
+            return deleteRec(node, node.key);
+        }
+
+        return node;
+    }
+
+    public void removeEvens() {
+        root = removeEvensSafe(root);
     }
 
     public long timePopulate(int n) {
@@ -83,7 +93,7 @@ public class tryBST {
 
     public long timeRemoveEvens() {
         long start = System.currentTimeMillis();
-        removeEvens(root);
+        removeEvens();
         long end = System.currentTimeMillis();
         return (end - start);
     }
@@ -103,7 +113,7 @@ public class tryBST {
             populateTimes[i] = endPop - startPop;
 
             long startRem = System.currentTimeMillis();
-            removeEvens(root);
+            removeEvens(); //
             long endRem = System.currentTimeMillis();
             removeTimes[i] = endRem - startRem;
         }
@@ -138,8 +148,8 @@ public class tryBST {
 
     public static void main(String[] args) {
         tryBST tree = new tryBST();
-        int n = 7;
-        int runs = 30;
+        int n = 22;
+        int runs = 10;
 
         tree.generateTable(n, runs);
 
