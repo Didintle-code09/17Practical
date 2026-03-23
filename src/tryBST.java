@@ -1,3 +1,6 @@
+import java.util.*;
+import java.io.*;
+
 class tNode {
     int key;
     tNode left;
@@ -84,5 +87,17 @@ public class tryBST {
         if (node.key % 2 == 0) {
             delete(node.key);
         }
+    }
+    public long timePopulate(int n) {
+        long start = System.currentTimeMillis();
+        buildPerfectBST(1, (int)Math.pow(2, n)-1);
+        long end = System.currentTimeMillis();
+        return (end - start)/1000000;
+    }
+    public long timeRemoveEvens() {
+        long start = System.currentTimeMillis();
+        removeEvens(root);
+        long end = System.currentTimeMillis();
+        return (end - start)/1000000;
     }
 }
