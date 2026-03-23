@@ -100,4 +100,13 @@ public class tryBST {
         long end = System.currentTimeMillis();
         return (end - start)/1000000;
     }
+    public static void main(String[] args) {
+        tryBST tree = new tryBST();
+        int n = 7;
+        long populateTime = tree.timePopulate(n);
+        long removeTimes = tree.timeRemoveEvens();
+        System.out.println("Populate tree time: " + populateTime + " ms");
+        System.out.println("Remove evens time: " + removeTimes + " ms");
+        System.out.println("Is BST? " + tree.isBST());
+    }
 }
