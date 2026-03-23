@@ -45,4 +45,34 @@ public class tryBST {
         buildPerfectBST(start, mid -1);
         buildPerfectBST(mid +1, end);
     }
+    tNode deleteRec(tNode root, int key) {
+        if (root == null) {
+            return root;
+        }
+        if (key < root.key) {
+            root.left = deleteRec(root.left, key);
+        } else if (key > root.key) {
+            root.right = deleteRec(root.right, key);
+        } else {
+            if (root.left == null) {
+                return root.right;
+            } else if (root.right == null) {
+                return root.left;
+            }
+            root.key = minValue(root.right);
+            root.right = deleteRec(root.right, root.key);
+        }
+        return root;
+    }
+    int minValue(tNode root) {
+        int minv = root.key;
+        while (root.left != null) {
+            minv = root.left.key;
+            root = root.left;
+        }
+        return minv;
+    }
+    public void delete(int key) {
+        root = deleteRec(root, key);
+    }
 }
