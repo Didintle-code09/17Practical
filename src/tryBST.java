@@ -36,4 +36,13 @@ public class tryBST {
         }
         return root;
     }
+    public void buildPerfectBST() {int start, int end} {
+        if (start >end){
+            return;
+        }
+        int mid = (start + end)/2;
+        insert(mid);
+        buildPerfectBST(start, mid -1);
+        buildPerfectBST(mid +1, end);
+    }
 }
