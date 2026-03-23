@@ -1,5 +1,4 @@
 import java.util.*;
-import java.io.*;
 
 class tNode {
     int key;
@@ -14,6 +13,7 @@ class tNode {
 }
 
 public class tryBST {
+    tNode root;
     boolean isBST() {
         return isBSTUtil(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
@@ -39,14 +39,19 @@ public class tryBST {
         }
         return root;
     }
-    public void buildPerfectBST() {int start, int end} {
-        if (start >end){
-            return;
-        }
-        int mid = (start + end)/2;
+    public void insert(int key) {
+        root = insertRec(root, key);
+    }
+
+    public void buildPerfectBST(int start, int end) {
+        if (start > end) return;
+
+        int mid = (start + end) / 2;
         insert(mid);
-        buildPerfectBST(start, mid -1);
-        buildPerfectBST(mid +1, end);
+
+        buildPerfectBST(start, mid - 1);
+        buildPerfectBST(mid + 1, end);
+
     }
     tNode deleteRec(tNode root, int key) {
         if (root == null) {
